@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ThoughtsService } from '@app/services/thoughts.service';
+import { Feelings } from '@app/@core/objects/feelings';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-feelings',
@@ -6,7 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feelings.component.css'],
 })
 export class FeelingsComponent implements OnInit {
-  constructor() {}
+  @Input()
+  userId: number;
 
-  ngOnInit(): void {}
+  @Input()
+  snapshotId: string;
+
+  feelings: Feelings;
+  isLoading = false;
+
+  constructor(private thoughtsSerivce: ThoughtsService) {}
+
+  ngOnInit() {
+    this.isLoading = true;
+    this.thoughtsSerivce
+      .getFeelings(this.userId, this.snapshotId)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe((feelings: Feelings) => {
+        this.feelings = feelings;
+      });
+  }
 }

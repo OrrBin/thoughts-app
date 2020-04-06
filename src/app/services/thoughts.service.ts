@@ -4,6 +4,10 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { UserIndex } from '@app/@core/objects/user';
 import { SnapshotIndex } from '@app/@core/objects/snapshot';
+import { Feelings } from '@app/@core/objects/feelings';
+import { Pose } from '@app/@core/objects/pose';
+import { ColorImage } from '@app/@core/objects/color_image';
+import { DepthImage } from '@app/@core/objects/depth_image';
 
 const routes = {
   quote: (c: RandomQuoteContext) => `/jokes/random?category=${c.category}`,
@@ -44,5 +48,21 @@ export class ThoughtsService {
     // map((body: any) => body.value),
     // catchError(() => of('Error, could not load joke :-('))
     // );
+  }
+
+  getFeelings(userId: number, snapshotId: string): Observable<Feelings> {
+    return this.httpClient.get<Feelings>(`${baseUrl}/users/${userId}/snapshots/${snapshotId}/feelings`);
+  }
+
+  getPose(userId: number, snapshotId: string): Observable<Pose> {
+    return this.httpClient.get<Pose>(`${baseUrl}/users/${userId}/snapshots/${snapshotId}/pose`);
+  }
+
+  getColorImage(userId: number, snapshotId: string): Observable<ColorImage> {
+    return this.httpClient.get<ColorImage>(`${baseUrl}/users/${userId}/snapshots/${snapshotId}/colorImage`);
+  }
+
+  getDepthImage(userId: number, snapshotId: string): Observable<DepthImage> {
+    return this.httpClient.get<DepthImage>(`${baseUrl}/users/${userId}/snapshots/${snapshotId}/depthImage`);
   }
 }

@@ -1,4 +1,4 @@
-<app-feelings *ngIf="hasFeelings()"></app-feelings>
+<app-feelings *ngIf="hasFeelings()" [snapshotId]="snapshotId" [userId]="userId"></app-feelings>
 <app-position *ngIf="hasPose()"></app-position>
 <app-image *ngIf="hasColorImage()"></app-image>
 <app-image *ngIf="hasDepthImage()"></app-image>

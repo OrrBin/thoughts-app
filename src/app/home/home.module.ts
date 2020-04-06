@@ -13,8 +13,10 @@ import { FeelingsComponent } from './feelings/feelings.component';
 import { ImageComponent } from './image/image.component';
 import { PositionComponent } from './position/position.component';
 
+import { MatCardModule } from '@angular/material/card';
+
 @NgModule({
-  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, HomeRoutingModule],
+  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, HomeRoutingModule, MatCardModule],
   declarations: [
     HomeComponent,
     UserPageComponent,

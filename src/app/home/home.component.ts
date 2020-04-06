@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 import { QuoteService } from './quote.service';
+import { ThoughtsService } from '@app/services/thoughts.service';
+import { UserIndex } from '@app/@core/objects/user';
 
 @Component({
   selector: 'app-home',
@@ -9,22 +11,19 @@ import { QuoteService } from './quote.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  quote: string | undefined;
+  users: UserIndex[] = [];
+
   isLoading = false;
 
-  constructor(private quoteService: QuoteService) {}
+  constructor(private thoughtsSerivce: ThoughtsService) {}
 
   ngOnInit() {
     this.isLoading = true;
-    this.quoteService
-      .getRandomQuote({ category: 'dev' })
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-        })
-      )
-      .subscribe((quote: string) => {
-        this.quote = quote;
+    this.thoughtsSerivce
+      .getUsers()
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe((users: UserIndex[]) => {
+        this.users = users;
       });
   }
 }

@@ -7,9 +7,21 @@ import { SharedModule } from '@shared';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { QuoteService } from './quote.service';
+import { UserPageComponent } from './user-page/user-page.component';
+import { SnapshotPageComponent } from './snapshot-page/snapshot-page.component';
+import { FeelingsComponent } from './feelings/feelings.component';
+import { ImageComponent } from './image/image.component';
+import { PositionComponent } from './position/position.component';
 
 @NgModule({
   imports: [CommonModule, TranslateModule, CoreModule, SharedModule, HomeRoutingModule],
-  declarations: [HomeComponent],
+  declarations: [
+    HomeComponent,
+    UserPageComponent,
+    SnapshotPageComponent,
+    FeelingsComponent,
+    ImageComponent,
+    PositionComponent,
+  ],
 })
 export class HomeModule {}
